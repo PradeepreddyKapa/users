@@ -1,0 +1,12 @@
+[Unit]
+Description=user service
+
+[Service]
+
+Environment=ZIPKIN_URL=http://172.31.27.189:9411/api/v2/spans
+Environment=AUTH_API_ADDRESS=http://172.31.30.118:8080
+ExecStart=/bin/java -jar /root/users/user.jar
+SyslogIdentifier=user
+
+[Install]
+WantedBy=multi-user.target
