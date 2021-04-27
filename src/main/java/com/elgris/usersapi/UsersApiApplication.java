@@ -6,7 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
 @SpringBootApplication
+@EnableScheduling
 public class UsersApiApplication {
 
 	public static void main(String[] args) {
