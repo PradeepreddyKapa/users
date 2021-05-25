@@ -1,0 +1,8 @@
+@Library('todos') _
+
+todos(
+ COMPONENT         : 'users',
+ PROJECT_NAME      : "todos",
+ SLAVE_LABEL       : "DEV",
+ APP_TYPE          : "MAVEN",
+)
