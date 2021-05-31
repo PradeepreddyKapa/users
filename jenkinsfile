@@ -1,8 +1,25 @@
-@Library('todos') _
+pipeline {
+    agent any 
+    
+    stages {
 
-todos(
- COMPONENT         : 'users',
- PROJECT_NAME      : "todos",
- SLAVE_LABEL       : "DEV",
- APP_TYPE          : "MAVEN",
-)
+        stage ('Prepare Artifacts'){
+
+            steps {
+                sh '''
+                zip -r frontend.zip *
+                '''
+
+            }
+        }
+
+        stage('Upload Artifacts'){
+
+            steps {
+                sh'''
+                  curl -v -u admin:admin --upload-file frontend.zip http://172.31.12.138:8081/repository/frontendtodo/frontend.zip
+                '''
+            }
+        }
+    }
+}
