@@ -1,34 +1,9 @@
-pipeline {
-    agent any
+@Library('todo_auto') _
 
-    stages {
-        stage ('Build code'){
-
-            steps {
-                sh '''
-                  mvn clean package
-                '''
-
-            }
-        }
-        stage ('Prepare Artifacts'){
-
-            steps {
-                sh '''
-                cp target/*.jar user.jar
-                zip -r user.zip user.jar
-                '''
-
-            }
-        }
-
-        stage('Upload Artifacts'){
-
-            steps {
-                sh'''
-                  curl -v -u admin:admin --upload-file user.zip http://172.31.12.138:8081/repository/users/user.zip
-                '''
-            }
-        }
-    }
-}
+todo(
+    COMPONENT         :  'users',
+    SLAVE_LABEL       :  "todo",
+    PROJECT_NAME      :  "TODO",
+    APP_TYPE          :  "MAVEN",
+    SKIP_NEXUS_UPLOAD :   false,
+)
